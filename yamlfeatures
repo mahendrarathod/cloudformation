@@ -3,3 +3,4 @@ nested object
 Array with simple - (dash)
 Multiline strin with | (pipe) - JSON not support it
 Comments with # - JSON not support it
+Empty object in yaml - {}
