@@ -1,0 +1,16 @@
+Parameter :- 
+             1)Type
+             2)Description
+             3)constarints
+             4)constarints description.
+             5)Min/Max lenght
+             6)Min/Max value
+             7)Default.
+             8)Allowed values(array)
+             9)Regular expression(regxp)
+             10)NoEcho(Bollean)
+###1)Type
+Parameters:
+  SecurityGroupDescription:
+    Description: Security Group Description (Simple parameter)
+    Type: String
