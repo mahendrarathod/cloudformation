@@ -1,2 +1,6 @@
 while updating cloudformation stack always check replacement on Review tab . 
 if its is false then its good if its true you need to take care while updating stack. 
+
+Parameter :- Reuse. for example to use instance type, subnet
+             Type:- string, Number, commadelimatedlist, AWS parameter ... AWS Parameter ?
+             
