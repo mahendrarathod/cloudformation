@@ -1,16 +1,5 @@
 while updating cloudformation stack always check replacement on Review tab . 
 if its is false then its good if its true you need to take care while updating stack. 
 
-Parameter :- Reuse. for example to use instance type, subnet
-             Type:- string, Number, commadelimatedlist, AWS parameter, AWS Parameter ?
-             1)Type
-             2)Description
-             3)constarints
-             4)constarints description.
-             5)Min/Max lenght
-             6)Min/Max value
-             7)Default.
-             8)Allowed values(array)
-             9)Regular expression(regxp)
-             10)NoEcho(Bollean)
+
              
