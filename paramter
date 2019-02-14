@@ -63,6 +63,9 @@ Parameters:
     Description: "Comma-delimited list of three CIDR blocks"
     Type: CommaDelimitedList
     Default: "192.168.10.1/24, 192.168.10.2/24, 192.168.10.3/24"
+    
+How to use commadelimited list?
+Ans :- !Select [0, !Ref DbSubnetIpBlocks]
   
     
     Ref URL : https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
