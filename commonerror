@@ -1,0 +1,2 @@
+1)Template validation error: Template error: all resources and parameters must have unique names. Common name(s):[Privatesubnet]
+Solution:- Check Names of resources and parameters are not same.
