@@ -1,5 +1,0 @@
-1)Template validation error: Template error: all resources and parameters must have unique names. Common name(s):[Privatesubnet]
-Solution:- Check Names of resources and parameters are not same.
-
-2)Template validation error: Template format error: Unresolved resource dependencies [VPC] in the Resources block of the template
-Solution:- Check mostly ref  you will find something which not defined any where. 
