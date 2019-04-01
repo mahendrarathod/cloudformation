@@ -1,0 +1,205 @@
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "Create VPC"
+        Parameters:
+          - vpc
+          - VPCInstanceTenancy
+      -
+        Label:
+          default: "Create Public Sublet1 & Public subnet 2"
+        Parameters:
+          - Publicsubnet1
+          - Publicsubnet1AvailabilityZone
+          - Publicsubnet2
+          - Publicsubnet2AvailabilityZone
+      -
+        Label:
+          default: "Create Public Sublet1 & Public subnet 2"
+        Parameters:
+          - Privatesubnet1
+          - Privatesubnet1AvailabilityZone
+          - Privatesubnet2
+          - Privatesubnet2AvailabilityZone
+
+Parameters:
+  vpc:
+    Description: Creating VPC .
+    Type: String
+    Default: 10.0.0.0/16
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: Must be valid IP Range.
+  VPCInstanceTenancy:
+    Type: String
+    Description: Tenency for VPC
+    Default: default
+    AllowedValues:
+      - default
+      - dedicated
+  Publicsubnet1:
+    Description: Public Subnet.
+    Type: String
+    Default: 10.0.1.0/24
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: Must be valid Public subnet IP Range.
+  Publicsubnet2:
+    Description: Private Subnet.
+    Type: String
+    Default: 10.0.2.0/24
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: Must be valid Private subnet IP Range.
+  Privatesubnet1:
+    Description: Private Subnet.
+    Type: String
+    Default: 10.0.3.0/24
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: Must be valid Private subnet IP Range.
+  Privatesubnet2:
+    Description: Private Subnet.
+    Type: String
+    Default: 10.0.4.0/24
+    AllowedPattern: (\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})
+    ConstraintDescription: Must be valid Private subnet IP Range.
+  Publicsubnet1AvailabilityZone:
+    Description: Please provide only one Availabilty Zone.
+    Type: AWS::EC2::AvailabilityZone::Name
+  Publicsubnet2AvailabilityZone:
+    Description: Please provide only one Availabilty Zone.
+    Type: AWS::EC2::AvailabilityZone::Name
+  Privatesubnet1AvailabilityZone:
+    Description: Please provide only one Availabilty Zone.
+    Type: AWS::EC2::AvailabilityZone::Name
+  Privatesubnet2AvailabilityZone:
+    Description: Please provide only one Availabilty Zone.
+    Type: AWS::EC2::AvailabilityZone::Name
+
+Resources:
+      task2vpc:
+        Type: 'AWS::EC2::VPC'
+        Properties:
+          CidrBlock: !Ref vpc
+          EnableDnsSupport: true
+          EnableDnsHostnames: true
+          InstanceTenancy: !Ref VPCInstanceTenancy
+          Tags:
+            - Key: Name
+              Value: task2VPC
+      PubSubnet1:
+        Type: 'AWS::EC2::Subnet'
+        Properties:
+          VpcId: !Ref task2vpc
+          AvailabilityZone: !Ref Publicsubnet1AvailabilityZone
+          CidrBlock: !Ref Publicsubnet1
+          MapPublicIpOnLaunch: true
+          Tags:
+            - Key: Name
+              Value: task2PublicSubnet1
+      PubSubnet2:
+        Type: 'AWS::EC2::Subnet'
+        Properties:
+          VpcId: !Ref task2vpc
+          AvailabilityZone: !Ref Publicsubnet2AvailabilityZone
+          CidrBlock: !Ref Publicsubnet2
+          MapPublicIpOnLaunch: true
+          Tags:
+            - Key: Name
+              Value: task2PublicSubnet2
+      Prisubnet1:
+        Type: 'AWS::EC2::Subnet'
+        Properties:
+          VpcId: !Ref task2vpc
+          AvailabilityZone: !Ref Privatesubnet1AvailabilityZone
+          CidrBlock: !Ref Privatesubnet1
+          Tags:
+            - Key: Name
+              Value: task2PrivateSubnet1
+      Prisubnet2:
+        Type: 'AWS::EC2::Subnet'
+        Properties:
+          VpcId: !Ref task2vpc
+          AvailabilityZone: !Ref Privatesubnet2AvailabilityZone
+          CidrBlock: !Ref Privatesubnet2
+          Tags:
+            - Key: Name
+              Value: task2PrivateSubnet2
+      InternetGateway:
+        Type: 'AWS::EC2::InternetGateway'
+        DependsOn: task2vpc
+        Properties:
+          Tags:
+            - Key: Name
+              Value: task2InternetGateway
+      AttachedIGWtoVPC:
+        Type: 'AWS::EC2::VPCGatewayAttachment'
+        Properties:
+          VpcId: !Ref task2vpc
+          InternetGatewayId: !Ref InternetGateway
+      PublicRouteTable:
+        Type: "AWS::EC2::RouteTable"
+        Properties:
+            VpcId: !Ref task2vpc
+            Tags:
+            - Key: Name
+              Value: task2PublicRouteTable
+      PrivateRouteTable:
+        Type: "AWS::EC2::RouteTable"
+        Properties:
+            VpcId: !Ref task2vpc
+            Tags:
+            - Key: Name
+              Value: task2PrivateRouteTable
+      PublicSubnet1RouteTableAssociation:
+        Type: 'AWS::EC2::SubnetRouteTableAssociation'
+        Properties:
+          SubnetId: !Ref PubSubnet1
+          RouteTableId: !Ref PublicRouteTable
+      PublicSubnet2RouteTableAssociation:
+        Type: 'AWS::EC2::SubnetRouteTableAssociation'
+        Properties:
+          SubnetId: !Ref PubSubnet2
+          RouteTableId: !Ref PublicRouteTable
+      PrivateSubnet2RouteTableAssociation:
+        Type: 'AWS::EC2::SubnetRouteTableAssociation'
+        Properties:
+          SubnetId: !Ref Prisubnet1
+          RouteTableId: !Ref PrivateRouteTable
+      PrivateSubnet2RouteTableAssociation:
+        Type: 'AWS::EC2::SubnetRouteTableAssociation'
+        Properties:
+          SubnetId: !Ref Prisubnet2
+          RouteTableId: !Ref PrivateRouteTable
+      AddPublicRoute:
+        Type: AWS::EC2::Route
+        DependsOn: AttachedIGWtoVPC
+        Properties:
+          DestinationCidrBlock: "0.0.0.0/0"
+          GatewayId: !Ref InternetGateway
+          RouteTableId: !Ref PublicRouteTable
+Outputs:
+  task2vpc:
+    Value: !Ref task2vpc
+    Description: task2 vpc id
+    Export:
+      Name: !Sub ${AWS::StackName}-vpc
+  task2Publicsubnet1:
+    Value: !Ref PubSubnet1
+    Description: Public subnet 1 id
+    Export:
+      Name: !Sub ${AWS::StackName}-Publicsubnet1
+  task2Publicsubnet2:
+    Value: !Ref PubSubnet2
+    Description: Public subnet 2 id
+    Export:
+      Name: !Sub ${AWS::StackName}-Publicsubnet2
+  task2Privatesubnet1:
+    Value: !Ref Prisubnet1
+    Description: Private subnet 1 id
+    Export:
+      Name: !Sub ${AWS::StackName}-Privatesubnet1
+  task2Privatesubnet2:
+    Value: !Ref Prisubnet2
+    Description: Private subnet 2 id
+    Export:
+      Name: !Sub ${AWS::StackName}-Privatesubnet2
