@@ -12,3 +12,4 @@
   - Two route tables Private & Public.
   - Create Internet gateway and attached it to VPC.
   - Public vpc subnet association.
+  - Export VPC ID , Public & Private Subnet ID's.
