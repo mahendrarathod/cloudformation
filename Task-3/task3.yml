@@ -1,0 +1,55 @@
+Parameters:
+  DevgroupName:
+    Description: Task-3 Devloper Group .
+    Type: String
+    Default: DevloperGroup
+  AdmingroupName:
+    Description: Task-3  Administrator Group .
+    Type: String
+    Default: AdminGroup
+  ReadOnlygroupName:
+    Description: Task-3 Read only Group .
+    Type: String
+    Default: ReadOnly
+  PowerUsergroupName:
+    Description: Task-3 Power User Group .
+    Type: String
+    Default: PowerUser
+Resources:
+  DeveloperGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Ref DevgroupName
+  AdministratorGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Ref AdmingroupName
+  ReadOnlyGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Ref ReadOnlygroupName
+  PowerUserGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Ref PowerUsergroupName
+Outputs:
+  DevGroup:
+    Value: !Ref DeveloperGroup
+    Description: task-3 Development IAM group
+    Export:
+      Name: !Sub ${AWS::StackName}-DevGroup
+  AdministratorGroup:
+    Value: !Ref AdministratorGroup
+    Description: task-3 Administrator IAM group
+    Export:
+      Name: !Sub ${AWS::StackName}-AdministratorGroup
+  ReadOnlyGroup:
+    Value: !Ref ReadOnlyGroup
+    Description: task-3 Read Only  IAM group
+    Export:
+      Name: !Sub ${AWS::StackName}-ReadOnlyGroup
+  PowerUserGroup:
+    Value: !Ref PowerUserGroup
+    Description: task-3 Power User  IAM group
+    Export:
+      Name: !Sub ${AWS::StackName}-PowerUserGroup
