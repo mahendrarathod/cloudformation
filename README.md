@@ -13,3 +13,10 @@
   - Create Internet gateway and attached it to VPC.
   - Public vpc subnet association.
   - Export VPC ID , Public & Private Subnet ID's.
+    
+## Task-3
+#### Create Users & Groups. 
+  - Create Gropus 1) Devloper 2) administrator 3) ReadOnly 4) PowerUser
+  - Create Users  1) Devloper 2) administrator 3) ReadOnly 4) PowerUser 
+  - & add users in to the respective group.
+
