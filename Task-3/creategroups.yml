@@ -37,19 +37,19 @@ Outputs:
     Value: !Ref DeveloperGroup
     Description: task-3 Development IAM group
     Export:
-      Name: !Sub ${AWS::StackName}-DevGroup
+      Name: !Sub DevGroup
   AdministratorGroup:
     Value: !Ref AdministratorGroup
     Description: task-3 Administrator IAM group
     Export:
-      Name: !Sub ${AWS::StackName}-AdministratorGroup
+      Name: !Sub AdministratorGroup
   ReadOnlyGroup:
     Value: !Ref ReadOnlyGroup
     Description: task-3 Read Only  IAM group
     Export:
-      Name: !Sub ${AWS::StackName}-ReadOnlyGroup
+      Name: !Sub ReadOnlyGroup
   PowerUserGroup:
     Value: !Ref PowerUserGroup
     Description: task-3 Power User  IAM group
     Export:
-      Name: !Sub ${AWS::StackName}-PowerUserGroup
+      Name: !Sub PowerUserGroup

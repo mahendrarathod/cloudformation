@@ -1,0 +1,20 @@
+Parameters:
+  ROUserName:
+    Description: Task-3 Read Only User Name .
+    Type: String
+    Default: readonly
+  ROPassword:
+    NoEcho: true
+    Type: String
+    Description: Read Only
+    MinLength: 1
+    MaxLength: 41
+Resources:
+  DevUser:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - Fn::ImportValue: ReadOnlyGroup
+      LoginProfile:
+        Password: !Ref ROPassword
+      UserName: !Ref ROUserName

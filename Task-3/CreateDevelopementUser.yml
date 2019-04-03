@@ -1,0 +1,20 @@
+Parameters:
+  DevUserName:
+    Description: Task-3 Devloper User Name .
+    Type: String
+    Default: devuser
+  DevUserPassword:
+    NoEcho: true
+    Type: String
+    Description: Dev user
+    MinLength: 1
+    MaxLength: 41
+Resources:
+  DevUser:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - Fn::ImportValue: DevGroup
+      LoginProfile:
+        Password: !Ref DevUserPassword
+      UserName: !Ref DevUserName
