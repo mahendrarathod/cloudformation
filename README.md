@@ -18,5 +18,6 @@
 #### Create IAM Users & Groups. 
   - Create Gropus 1) Devloper 2) administrator 3) ReadOnly 4) PowerUser
   - Create Users  1) Devloper 2) administrator 3) ReadOnly 4) PowerUser 
-  - & add users in to the respective group.
-
+  - Attached administrator access policy to administrator user and read only policy to read only user. 
+  - Add users in to the respective group.
+  - Create inline policy for Power user & Developer user. 
