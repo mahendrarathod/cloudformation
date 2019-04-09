@@ -24,10 +24,13 @@ Resources:
     Type: AWS::IAM::Group
     Properties:
       GroupName: !Ref AdmingroupName
+      "Policies":
+        - AdministratorAccess
   ReadOnlyGroup:
     Type: AWS::IAM::Group
     Properties:
       GroupName: !Ref ReadOnlygroupName
+        - ReadOnlyAccess
   PowerUserGroup:
     Type: AWS::IAM::Group
     Properties:

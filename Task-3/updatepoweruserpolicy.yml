@@ -1,0 +1,24 @@
+Parameters:
+  Nameofpolicy:
+    Description: Policy for developer group.
+    Type: String
+    Default: developerpolicy
+Resources:
+  DevloperPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      Groups:
+        - Fn::ImportValue: DevGroup
+      PolicyName: "developerpolicy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action:
+              - "cloudformation:Describe*"
+              - "cloudformation:List*"
+              - "cloudformation:Get*"
+              - "ec2:RebootInstances"
+              - "rds:RebootDBInstance"
+            Resource: "*"

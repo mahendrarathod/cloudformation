@@ -1,0 +1,22 @@
+Parameters:
+  Nameofpolicy:
+    Description: Power User for developer group.
+    Type: String
+    Default: poweruser
+Resources:
+  DevloperPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      Groups:
+        - Fn::ImportValue: PowerUserGroup
+      PolicyName: "poweruserpolicy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action:
+              - "cloudformation:*"
+              - "ec2:*"
+              - "rds:*"
+            Resource: "*"
